@@ -1,10 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivaan Jain's Finance Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1DCA90;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            margin: 15px 0;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .hero {
+            background-image: url('path_to_profile_image.jpg');
+            height: 400px;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .about, .experience, .roadmap, .contact {
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            background-color: #1e1e1e;
+        }
+        @media (max-width: 600px) {
+            .hero {
+                height: 250px;
+            }
+        }
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Portfolio</h1>
-    <p>This is the updated content of my portfolio website.</p>
+    <header>
+        <h1>Vivaan Jain's Finance Portfolio</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <div class="hero fade-in">
+        <h2>Welcome to My Portfolio</h2>
+    </div>
+    <section id="about" class="about">
+        <h3>About Me</h3>
+        <p>Brief introduction about Vivaan Jain, focusing on finance and career goals.</p>
+    </section>
+    <section id="experience" class="experience">
+        <h3>Experience</h3>
+        <ul>
+            <li>Job Role 1 - Company 1</li>
+            <li>Job Role 2 - Company 2</li>
+        </ul>
+    </section>
+    <section id="roadmap" class="roadmap">
+        <h3>Roadmap</h3>
+        <p>Future goals and projects planned.</p>
+    </section>
+    <section id="contact" class="contact">
+        <h3>Contact Me</h3>
+        <p>Email: example@example.com</p>
+    </section>
 </body>
 </html>
