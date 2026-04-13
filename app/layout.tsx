@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { DM_Sans, DM_Serif_Display, DM_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const dmSans = DM_Sans({ 
@@ -37,7 +36,6 @@ export default function RootLayout({
     <html lang="en" className={`${dmSans.variable} ${dmSerif.variable} ${dmMono.variable}`}>
       <body className="font-sans antialiased">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
