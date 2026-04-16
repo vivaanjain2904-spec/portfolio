@@ -235,6 +235,7 @@ export default function Home() {
         <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>Open to internship opportunities, finance conversations, and IB recruiting.</p>
 
         <div className="contact-links">
+          <a href="mailto:vivaanjain2904@gmail.com" className="c-link">EMAIL</a>
           <a href="https://linkedin.com/in/vivaanjain2904" className="c-link" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
           <a href="/resume.pdf" className="c-link" target="_blank" rel="noopener noreferrer">RESUME PDF</a>
           <a href="https://webapp4.asu.edu/directory/person/4181869" className="c-link" target="_blank" rel="noopener noreferrer">ASU PROFILE</a>
