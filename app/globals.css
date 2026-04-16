@@ -1,11 +1,9 @@
-@import 'tailwindcss';
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: linear-gradient(135deg, #0a0f0d 0%, #0d1411 50%, #0a0f0d 100%);
-  color: #c4d4cc;
+  background: #0a0e0d;
+  color: #e8f0eb;
   line-height: 1.6;
   min-height: 100vh;
 }
