@@ -63,7 +63,7 @@ export default function PortfolioPage() {
             <div className="flex items-center gap-2 mb-8">
               <span className="w-2 h-2 rounded-full bg-primary" />
               <p className="text-xs text-primary tracking-[0.2em] uppercase">
-                ASU W. P. Carey School of Business · Economics · Class of 2028
+                ASU W. P. Carey School of Business · Finance &amp; Economics · Class of 2028
               </p>
             </div>
             
@@ -78,7 +78,7 @@ export default function PortfolioPage() {
             </h1>
             
             <p className="text-lg text-muted-foreground max-w-xl mb-12 leading-relaxed">
-              Sophomore at Arizona State University studying Economics, with hands-on experience in finance, paper trading, and market analysis.
+              Sophomore at Arizona State University studying Finance &amp; Economics, with hands-on experience in finance, paper trading, and market analysis.
             </p>
 
             {/* Profile Image */}
@@ -101,7 +101,7 @@ export default function PortfolioPage() {
               {/* Left Column - Text */}
               <div className="space-y-6 text-muted-foreground leading-relaxed">
                 <p>
-                  I&apos;m a sophomore studying <span className="text-foreground font-semibold">Economics at ASU&apos;s W. P. Carey School of Business</span>, driven by a long-term goal of launching my own hedge fund. Every class, internship, and side project is a step toward that.
+                  I&apos;m a sophomore studying <span className="text-foreground font-semibold">Finance &amp; Economics at ASU&apos;s W. P. Carey School of Business</span>, driven by a long-term goal of launching my own hedge fund. Every class, internship, and side project is a step toward that.
                 </p>
                 <p>
                   I&apos;m actively involved in paper trading and market analysis, constantly building my understanding of how capital markets work — not just in theory, but in practice.
@@ -336,7 +336,7 @@ export default function PortfolioPage() {
             <div className="grid md:grid-cols-5 gap-6">
               <div className="border-t-2 border-border/50 pt-6">
                 <h3 className="text-lg font-semibold text-foreground mb-3">Foundations</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">ASU Economics degree, IBIS program, paper trading, DCF modeling, Excel mastery</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">ASU Finance &amp; Economics degree, IBIS program, paper trading, DCF modeling, Excel mastery</p>
               </div>
               <div className="border-t-2 border-border/50 pt-6">
                 <h3 className="text-lg font-semibold text-foreground mb-3">IB / Research Role</h3>
@@ -344,7 +344,7 @@ export default function PortfolioPage() {
               </div>
               <div className="border-t-2 border-border/50 pt-6">
                 <h3 className="text-lg font-semibold text-foreground mb-3">Graduation &amp; FT</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">B.S. Economics from W. P. Carey. Full-time analyst role. Python, Bloomberg Terminal proficiency.</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">B.S. Finance &amp; Economics from W. P. Carey. Full-time analyst role. Python, Bloomberg Terminal proficiency.</p>
               </div>
               <div className="border-t-2 border-border/50 pt-6">
                 <h3 className="text-lg font-semibold text-foreground mb-3">Build Track Record</h3>
