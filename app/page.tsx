@@ -282,7 +282,7 @@ export default function PortfolioPage() {
             <div className="space-y-12">
               <div className="grid md:grid-cols-4 gap-6 pb-12 border-b border-border/30">
                 <div>
-                  <p className="text-xs text-muted-foreground tracking-wide">MAR 2026 – PRESENT</p>
+                  <p className="text-xs text-muted-foreground tracking-wide">MAR – MAY 2026</p>
                 </div>
                 <div className="md:col-span-3">
                   <h3 className="text-lg font-semibold text-foreground mb-1">Office Assistant</h3>
