@@ -106,9 +106,6 @@ export default function PortfolioPage() {
                 <p>
                   I&apos;m actively involved in paper trading and market analysis, constantly building my understanding of how capital markets work — not just in theory, but in practice.
                 </p>
-                <p>
-                  Currently applying to the <span className="text-foreground font-semibold">Investment Banking Industry Scholars (IBIS) program</span> at W. P. Carey to deepen my IB exposure and network.
-                </p>
               </div>
 
               {/* Right Column - Skills Grid */}
@@ -336,7 +333,7 @@ export default function PortfolioPage() {
             <div className="grid md:grid-cols-5 gap-6">
               <div className="border-t-2 border-border/50 pt-6">
                 <h3 className="text-lg font-semibold text-foreground mb-3">Foundations</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">ASU Finance &amp; Economics degree, IBIS program, paper trading, DCF modeling, Excel mastery</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">ASU Finance &amp; Economics degree, paper trading, DCF modeling, Excel mastery</p>
               </div>
               <div className="border-t-2 border-border/50 pt-6">
                 <h3 className="text-lg font-semibold text-foreground mb-3">IB / Research Role</h3>
