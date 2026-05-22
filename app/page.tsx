@@ -207,66 +207,63 @@ export default function PortfolioPage() {
           </div>
         </section>
 
-        {/* AI Portfolio Agent - Featured Project */}
+        {/* Vaelor - Featured Project */}
         <section className="py-24 px-6 lg:px-12 border-t border-border/30">
           <div className="mx-auto max-w-7xl">
             <p className="text-xs text-primary tracking-[0.2em] uppercase mb-4">// Algorithmic Trading</p>
-            <h2 className="text-4xl md:text-5xl font-serif mb-16">AI Portfolio Agent</h2>
+            <Link 
+              href="https://vaelor.dev" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block hover:opacity-80 transition-opacity"
+            >
+              <h2 className="text-4xl md:text-5xl font-serif mb-16">Vaelor</h2>
+            </Link>
             
             {/* Project Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
               <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">MODELS TRAINED</p>
-                <p className="text-2xl font-bold text-primary font-mono">541</p>
-                <p className="text-xs text-muted-foreground mt-2">Random Forest classifiers</p>
+                <p className="text-xs text-muted-foreground mb-3 tracking-wide">SIGNALS</p>
+                <p className="text-2xl font-bold text-primary font-mono">Multi-factor</p>
+                <p className="text-xs text-muted-foreground mt-2">RSI + MA + Momentum</p>
               </div>
               <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">UNIVERSE</p>
-                <p className="text-2xl font-bold text-primary font-mono">S&amp;P + NQ</p>
-                <p className="text-xs text-muted-foreground mt-2">S&amp;P 500 &amp; NASDAQ tickers</p>
+                <p className="text-xs text-muted-foreground mb-3 tracking-wide">STOPS</p>
+                <p className="text-2xl font-bold text-primary font-mono">ATR-based</p>
+                <p className="text-xs text-muted-foreground mt-2">Per-stock volatility sizing</p>
               </div>
               <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">TRADING</p>
+                <p className="text-xs text-muted-foreground mb-3 tracking-wide">ALERTS</p>
+                <p className="text-2xl font-bold text-primary font-mono">&lt;15 min</p>
+                <p className="text-xs text-muted-foreground mt-2">Email · Push · Discord</p>
+              </div>
+              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
+                <p className="text-xs text-muted-foreground mb-3 tracking-wide">EXECUTION</p>
                 <p className="text-2xl font-bold text-primary font-mono">Alpaca</p>
-                <p className="text-xs text-muted-foreground mt-2">Live paper trading API</p>
-              </div>
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">BACKTESTING</p>
-                <p className="text-2xl font-bold text-primary font-mono">Built-in</p>
-                <p className="text-xs text-muted-foreground mt-2">Strategy validation engine</p>
+                <p className="text-xs text-muted-foreground mt-2">Auto paper trading API</p>
               </div>
               <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
                 <p className="text-xs text-muted-foreground mb-3 tracking-wide">DEPLOYMENT</p>
                 <p className="text-2xl font-bold text-primary font-mono">Live</p>
-                <p className="text-xs text-muted-foreground mt-2">Streamlit Cloud</p>
+                <p className="text-xs text-muted-foreground mt-2">vaelor.dev</p>
               </div>
             </div>
 
             <p className="text-muted-foreground leading-relaxed max-w-3xl mb-8">
-              Built a full-stack algorithmic trading dashboard powered by 541 trained Random Forest models across S&amp;P 500 and NASDAQ tickers. Features a cross-sectional stock screener, backtesting engine, candlestick charts, and a live news feed — all integrated with the Alpaca paper trading API. Reflects my hands-on approach to quantitative investing and systematic strategy development on the path toward running a fund.
+              Built a full-stack paper trading platform that sizes stop-loss and take-profit levels using each stock&apos;s own volatility (14-day ATR) and scores drop probability through a blend of RSI, moving averages, and momentum. Multi-channel alerts fire via email, mobile push, and Discord within 15 minutes of any threshold trip, with optional hands-off execution through the Alpaca paper trading API. Built for retail traders who can&apos;t watch the screen all day — Vaelor pages you when something matters and stays quiet otherwise.
             </p>
 
-            <div className="flex flex-wrap gap-3 mb-8">
+            <div className="flex flex-wrap gap-3">
               <span className="px-4 py-2 border border-primary text-primary rounded text-xs tracking-wide">
-                MACHINE LEARNING
+                RISK MANAGEMENT
               </span>
               <span className="px-4 py-2 border border-primary text-primary rounded text-xs tracking-wide">
-                PAPER TRADING
+                REAL-TIME ALERTS
               </span>
               <span className="px-4 py-2 border border-primary text-primary rounded text-xs tracking-wide">
-                QUANTITATIVE FINANCE
+                FULL-STACK
               </span>
             </div>
-
-            <Link 
-              href="https://ai-portfolio-agent-vivaan.streamlit.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm border border-primary px-4 py-2 rounded"
-            >
-              View Live Project
-              <ExternalLink className="h-4 w-4" />
-            </Link>
           </div>
         </section>
 
