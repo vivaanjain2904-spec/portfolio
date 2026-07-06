@@ -1,396 +1,570 @@
+"use client"
+
+import { useEffect, useRef } from "react"
 import Link from "next/link"
-import Image from "next/image"
-import { ExternalLink } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
+
+/* ------------------------------------------------------------------ */
+/*  Content — sourced directly from Vivaan Jain's resume               */
+/* ------------------------------------------------------------------ */
+
+const experience = [
+  {
+    n: "01",
+    category: "Finance Operations",
+    color: "var(--chart-1)",
+    role: "Office Assistant",
+    org: "ASU Department of Psychology",
+    meta: "Tempe, AZ · Mar – May 2026",
+    points: [
+      "Processed financial documentation and expense reports in Workday, ensuring accuracy across departmental reimbursement records.",
+      "Managed front-desk operations including call handling, scheduling, mail distribution, and maintenance of confidential departmental records.",
+      "Supported faculty and staff with inventory tracking, data entry, and ad hoc administrative projects.",
+    ],
+  },
+  {
+    n: "02",
+    category: "Facilities Operations",
+    color: "var(--chart-3)",
+    role: "Maintenance & Operations Office Assistant",
+    org: "ASU Facilities Development & Management",
+    meta: "Tempe, AZ · Mar 2026 – Present",
+    points: [
+      "Maintained data integrity across work orders and asset records in TMA facilities management software during evening shift operations.",
+      "Handled inbound calls and service requests, routing issues to appropriate teams and ensuring timely follow-up on open tickets.",
+    ],
+  },
+  {
+    n: "03",
+    category: "Trade & Supply Ops",
+    color: "var(--chart-2)",
+    role: "Office Aide",
+    org: "ESSE Trading Impex LLP",
+    meta: "May – Aug 2024",
+    points: [
+      "Tracked purchase orders and supplier shipments in Microsoft Excel; reconciled invoices to POs and flagged pricing discrepancies for finance review.",
+      "Prepared weekly order-processing and shipment-tracking reports used to support inventory and operations decisions.",
+      "Coordinated agendas and logistics for cross-departmental meetings between procurement, logistics, and finance teams.",
+    ],
+  },
+  {
+    n: "04",
+    category: "Finance Internship",
+    color: "var(--chart-4)",
+    role: "Finance Intern",
+    org: "InnoLearn Solutions Pvt Ltd",
+    meta: "May – Jun 2023",
+    points: [
+      "Assisted the finance team with organizing financial records, supporting data analysis, and preparing documentation for internal review cycles.",
+      "Built and maintained a user-records database in Excel using Pivot Tables, VLOOKUP, and advanced formulas to track key performance metrics.",
+      "Designed Gmail automation workflows to streamline team communication and reduce manual follow-up overhead.",
+    ],
+  },
+]
+
+const projects = [
+  {
+    n: "01",
+    title: "Vaelor",
+    subtitle: "AI Trading & Investment Platform",
+    year: "2026",
+    href: "https://vaelor.dev",
+    description:
+      "Designed, built, and deployed a full-stack, multi-user paper-trading and portfolio analytics platform with real-time market data, ML-driven buy/sell signals, smart stop-loss logic, an integrated backtesting engine, sector-allocation analytics, and a JWT-authenticated client portal.",
+    tags: [
+      "Next.js 14",
+      "TypeScript",
+      "Neon PostgreSQL",
+      "ML Signals",
+      "Backtesting",
+      "Yahoo Finance",
+      "Vercel",
+    ],
+  },
+  {
+    n: "02",
+    title: "Target Corporation",
+    subtitle: "Discounted Cash Flow Valuation Model",
+    year: "Independent Project",
+    href: null,
+    description:
+      "Built a full Excel operating model with 5-year income statement projections, unlevered free cash flow buildup, WACC, and terminal value under both Gordon Growth and exit-multiple methodologies. Ran sensitivity and scenario analysis on WACC and terminal growth to derive an implied share price range.",
+    tags: [
+      "DCF",
+      "WACC",
+      "Gordon Growth",
+      "Exit Multiple",
+      "Sensitivity Analysis",
+      "Equity Research",
+    ],
+  },
+]
+
+const skillGroups = [
+  {
+    label: "Financial Analysis & Modeling",
+    items:
+      "DCF Valuation · Three-Statement Modeling · Comparable Companies (Comps) · Precedent Transactions · LBO Modeling · Equity Research · Capital Markets · Financial Statement Analysis · Variance Analysis · Sensitivity & Scenario Analysis · Forecasting · Budgeting",
+  },
+  {
+    label: "Microsoft Office Suite",
+    items:
+      "Excel (Advanced — Pivot Tables, VLOOKUP, XLOOKUP, INDEX/MATCH, SUMIFS, Data Tables, Macros) · PowerPoint (Pitch Decks, Financial Slide Formatting) · Word · Outlook",
+  },
+  {
+    label: "Data & Programming",
+    items:
+      "Python (pandas, scikit-learn, Streamlit, VADER NLP) · SQL / PostgreSQL · TypeScript · JavaScript · React · Next.js · HTML / CSS · Java · Data Visualization · Statistical Analysis",
+  },
+  {
+    label: "Platforms & Tools",
+    items:
+      "Bloomberg Terminal (familiar) · Workday · TMA Facilities Management · Google Workspace · Git / GitHub · Vercel",
+  },
+]
+
+const heroFrames = [
+  { label: "01 · MARKETS", w: "82%", h: "60%", border: "rgba(23,20,15,.16)", rust: false },
+  { label: "02 · MODELING", w: "56%", h: "40%", border: "rgba(23,20,15,.22)", rust: false },
+  { label: "03 · BUILDING", w: "30%", h: "22%", border: "rgba(193,68,28,.35)", rust: true },
+  { label: "04", w: "12%", h: "8%", border: "rgba(23,20,15,.28)", rust: false },
+]
+
+/* ------------------------------------------------------------------ */
+/*  Page                                                               */
+/* ------------------------------------------------------------------ */
 
 export default function PortfolioPage() {
-  return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      {/* Starry Background */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-background to-background" />
-        {/* Stars */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(2px 2px at 20px 30px, white, transparent),
-            radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
-            radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.6), transparent),
-            radial-gradient(2px 2px at 130px 80px, white, transparent),
-            radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.5), transparent),
-            radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.7), transparent),
-            radial-gradient(1px 1px at 250px 160px, white, transparent),
-            radial-gradient(2px 2px at 300px 90px, rgba(255,255,255,0.6), transparent),
-            radial-gradient(1px 1px at 350px 200px, rgba(255,255,255,0.8), transparent),
-            radial-gradient(2px 2px at 400px 150px, white, transparent),
-            radial-gradient(1px 1px at 450px 50px, rgba(255,255,255,0.5), transparent),
-            radial-gradient(2px 2px at 500px 180px, rgba(255,255,255,0.7), transparent),
-            radial-gradient(1px 1px at 550px 100px, white, transparent),
-            radial-gradient(2px 2px at 600px 220px, rgba(255,255,255,0.6), transparent),
-            radial-gradient(1px 1px at 650px 60px, rgba(255,255,255,0.8), transparent),
-            radial-gradient(2px 2px at 700px 140px, white, transparent),
-            radial-gradient(1px 1px at 750px 250px, rgba(255,255,255,0.5), transparent),
-            radial-gradient(2px 2px at 800px 80px, rgba(255,255,255,0.7), transparent),
-            radial-gradient(1px 1px at 850px 190px, white, transparent),
-            radial-gradient(2px 2px at 900px 120px, rgba(255,255,255,0.6), transparent)`,
-          backgroundSize: '1000px 300px',
-        }} />
-        {/* Grid Overlay */}
-        <div className="absolute inset-0 opacity-[0.08]" style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-        }} />
-      </div>
+  const heroRef = useRef<HTMLElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
+  const heroContentRef = useRef<HTMLDivElement>(null)
 
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12 py-4 flex items-center justify-between">
-          <Link href="/" className="text-primary font-medium tracking-wider text-sm">
-            VIVAAN.IO
+  // Scroll-linked "zoom into the frame" hero, matched to reduced-motion.
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduce) return
+
+    let ticking = false
+    const update = () => {
+      const hero = heroRef.current
+      const stage = stageRef.current
+      const content = heroContentRef.current
+      if (hero && stage && content) {
+        const heroH = hero.offsetHeight * 0.85
+        const p = Math.min(Math.max(window.scrollY / heroH, 0), 1)
+        stage.style.transform = `scale(${1 + p * 4.4}) rotate(${p * 7}deg)`
+        stage.style.opacity = String(1 - Math.max(0, (p - 0.7) / 0.3))
+        content.style.transform = `translateY(${p * -50}px)`
+        content.style.opacity = String(1 - Math.min(1, p * 1.3))
+      }
+      ticking = false
+    }
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update)
+        ticking = true
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    update()
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  // Reveal-on-scroll for every element tagged `.reveal`.
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"))
+    if (!("IntersectionObserver" in window)) {
+      els.forEach((el) => el.classList.add("in-view"))
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in-view")
+            io.unobserve(e.target)
+          }
+        })
+      },
+      { threshold: 0.12 },
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <div className="overflow-x-hidden">
+      <div className="noise-overlay" aria-hidden="true" />
+
+      {/* ===== NAV ===== */}
+      <header className="fixed top-0 left-0 right-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+          <Link href="#hero" className="font-serif italic text-lg tracking-tight">
+            Vivaan<span className="text-primary"> / </span>Jain
           </Link>
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
-            <a href="#experience" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Experience</a>
-            <a href="#research" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Research</a>
-            <a href="#roadmap" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Roadmap</a>
-            <a href="#contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+          <nav className="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground">
+            <a href="#about" className="hover:text-foreground transition-colors">About</a>
+            <a href="#experience" className="hover:text-foreground transition-colors">Experience</a>
+            <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
+            <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </nav>
+          <span className="font-mono text-[11px] tracking-[.14em] border border-border rounded-full px-3 py-1.5 text-muted-foreground">
+            ECON · FINANCE ’28
+          </span>
         </div>
       </header>
 
-      <main className="relative z-10">
-        {/* Hero Section */}
-        <section className="min-h-screen pt-32 pb-20 px-6 lg:px-12 flex flex-col justify-center">
-          <div className="mx-auto max-w-7xl w-full">
-            <div className="flex items-center gap-2 mb-8">
-              <span className="w-2 h-2 rounded-full bg-primary" />
-              <p className="text-xs text-primary tracking-[0.2em] uppercase">
-                ASU W. P. Carey School of Business · Finance &amp; Economics · Class of 2028
-              </p>
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8">
-              <span className="text-foreground">Future </span>
-              <span className="font-serif italic text-primary">Hedge Fund</span>
-              <br />
-              <span className="text-foreground">Manager.</span>
-              <br />
-              <span className="font-serif italic text-primary">Building </span>
-              <span className="text-muted-foreground">Now.</span>
-            </h1>
-            
-            <p className="text-lg text-muted-foreground max-w-xl mb-12 leading-relaxed">
-              Sophomore at Arizona State University studying Finance &amp; Economics, with hands-on experience in finance, paper trading, and market analysis.
-            </p>
+      <main>
+        {/* ===== HERO ===== */}
+        <section
+          id="hero"
+          ref={heroRef}
+          className="relative min-h-[100svh] flex items-center justify-center px-6"
+          style={{ perspective: "1400px" }}
+        >
+          <div ref={stageRef} className="absolute inset-0 pointer-events-none" aria-hidden="true">
+            {heroFrames.map((f) => (
+              <div
+                key={f.label}
+                className="hero-frame"
+                style={{ width: f.w, height: f.h, borderColor: f.border }}
+              >
+                <span
+                  className="font-mono text-[10px] tracking-[.14em]"
+                  style={{ color: f.rust ? "var(--rust)" : "var(--ink-soft)" }}
+                >
+                  {f.label}
+                </span>
+              </div>
+            ))}
+          </div>
 
-            {/* Profile Image */}
-            <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden">
-              <Image
-                src="/vivaan-profile.jpg"
-                alt="Vivaan Jain"
-                fill
-                className="object-cover"
-                priority
-              />
+          <div
+            className="absolute inset-0 z-[5] pointer-events-none"
+            aria-hidden="true"
+            style={{
+              background:
+                "radial-gradient(ellipse 44rem 28rem at 50% 46%, var(--paper) 32%, transparent 74%)",
+            }}
+          />
+
+          <div ref={heroContentRef} className="relative z-10 text-center max-w-3xl mx-auto">
+            <p className="font-mono text-[11px] uppercase tracking-[.22em] text-muted-foreground mb-6">
+              Economics &amp; Finance — W. P. Carey School of Business · ’28
+            </p>
+            <h1 className="font-serif text-[13vw] sm:text-[9vw] md:text-6xl lg:text-7xl leading-[0.95] tracking-tight font-light">
+              The long road to running{" "}
+              <em className="italic text-primary">my own fund.</em>
+            </h1>
+            <p className="mt-6 text-[15px] md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              I&apos;m Vivaan Jain — a sophomore at Arizona State studying Economics &amp; Finance,
+              building the modeling, markets, and engineering skills to launch a hedge fund. Every
+              course, role, and project is one frame in that story.
+            </p>
+            <div className="mt-9 flex items-center justify-center gap-4">
+              <a
+                href="#projects"
+                className="font-mono text-[11px] uppercase tracking-[.16em] bg-primary text-primary-foreground rounded-full px-5 py-2.5 hover:opacity-90 transition-opacity"
+              >
+                See the work
+              </a>
+              <a
+                href="#contact"
+                className="font-mono text-[11px] uppercase tracking-[.16em] border border-border rounded-full px-5 py-2.5 hover:border-foreground transition-colors"
+              >
+                Get in touch
+              </a>
             </div>
+          </div>
+
+          <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-2 z-10">
+            <div className="font-mono text-[10px] uppercase tracking-[.2em] text-muted-foreground">
+              Scroll to zoom in
+            </div>
+            <div className="animate-bob w-px h-8 bg-muted-foreground" />
           </div>
         </section>
 
-        {/* About Section - Two Column Layout */}
-        <section id="about" className="py-24 px-6 lg:px-12">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid lg:grid-cols-2 gap-16">
-              {/* Left Column - Text */}
-              <div className="space-y-6 text-muted-foreground leading-relaxed">
-                <p>
-                  I&apos;m a sophomore studying <span className="text-foreground font-semibold">Finance &amp; Economics at ASU&apos;s W. P. Carey School of Business</span>, driven by a long-term goal of launching my own hedge fund. Every class, internship, and side project is a step toward that.
-                </p>
-                <p>
-                  I&apos;m actively involved in paper trading and market analysis, constantly building my understanding of how capital markets work — not just in theory, but in practice.
-                </p>
-              </div>
+        {/* ===== ABOUT / FIELD GUIDE ===== */}
+        <section id="about" className="border-t border-border px-6 md:px-10 py-24 md:py-32">
+          <div className="max-w-4xl mx-auto">
+            <p className="font-mono text-[11px] uppercase tracking-[.2em] text-primary mb-6 reveal">
+              About
+            </p>
+            <p className="dropcap font-serif text-2xl md:text-[32px] leading-[1.4] tracking-tight reveal">
+              I&apos;m driven by a single long-term goal: launching my own hedge fund. At W. P. Carey
+              I&apos;m building the foundation for it — three-statement and DCF valuation modeling,
+              equity research, and the discipline of the markets through active paper trading. In
+              parallel I taught myself to ship software, designing and deploying Vaelor, a full-stack
+              AI trading platform, from database to client portal. I care about the same thing in a
+              spreadsheet and a codebase: rigor you can defend, and an edge you can measure.
+            </p>
 
-              {/* Right Column - Skills Grid */}
-              <div>
-                <p className="text-xs text-muted-foreground tracking-[0.2em] uppercase mb-6">// Skills &amp; Tools</p>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    "Microsoft Excel", "MS Office Suite",
-                    "JavaScript", "HTML / CSS",
-                    "Java", "Financial Modeling",
-                    "DCF Analysis", "Paper Trading",
-                    "Market Research", "Managerial Acctg"
-                  ].map((skill) => (
-                    <div key={skill} className="flex items-center gap-3 p-4 bg-card/30 border border-border/30 rounded-lg">
-                      <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
-                      <span className="text-sm text-muted-foreground font-mono">{skill}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Coursework Depth */}
-                <div className="mt-12">
-                  <p className="text-xs text-muted-foreground tracking-[0.2em] uppercase mb-6">// Coursework Depth</p>
-                  <div className="space-y-4">
-                    {[
-                      { name: "Macro Econ", progress: 90 },
-                      { name: "Mgmt Acctg", progress: 85 },
-                      { name: "Pol. Science", progress: 80 },
-                      { name: "Sociology", progress: 75 },
-                      { name: "History", progress: 70 }
-                    ].map((course) => (
-                      <div key={course.name} className="flex items-center gap-4">
-                        <span className="text-sm text-muted-foreground w-24">{course.name}</span>
-                        <div className="flex-1 h-2 bg-border/30 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full bg-primary rounded-full"
-                            style={{ width: `${course.progress}%` }}
-                          />
-                        </div>
-                        <span className="text-sm text-primary w-12 text-right">{course.progress}%</span>
-                      </div>
-                    ))}
+            <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-px bg-border border border-border rounded-2xl overflow-hidden reveal">
+              {[
+                { k: "GPA", v: "3.47" },
+                { k: "Honors", v: "Dean’s List" },
+                { k: "Graduating", v: "2028" },
+                { k: "Licensing", v: "SIE — in progress" },
+              ].map((s) => (
+                <div key={s.k} className="bg-background p-5 md:p-6">
+                  <div className="font-serif text-2xl md:text-3xl tracking-tight">{s.v}</div>
+                  <div className="font-mono text-[10px] uppercase tracking-[.16em] text-muted-foreground mt-2">
+                    {s.k}
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* DCF Modeling Section */}
-        <section id="research" className="py-24 px-6 lg:px-12 border-t border-border/30">
-          <div className="mx-auto max-w-7xl">
-            <p className="text-xs text-primary tracking-[0.2em] uppercase mb-4">// Financial Research</p>
-            <h2 className="text-4xl md:text-5xl font-serif mb-16">DCF Modeling &amp; Analysis</h2>
-            
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">METHODOLOGY</p>
-                <p className="text-2xl font-bold text-primary font-mono">DCF</p>
-                <p className="text-xs text-muted-foreground mt-2">Discounted Cash Flow</p>
-              </div>
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">PROJECTION PERIOD</p>
-                <p className="text-2xl font-bold text-primary font-mono">5-10 Yr</p>
-                <p className="text-xs text-muted-foreground mt-2">Free cash flow forecast</p>
-              </div>
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">KEY INPUTS</p>
-                <p className="text-2xl font-bold text-primary font-mono">WACC</p>
-                <p className="text-xs text-muted-foreground mt-2">Weighted avg cost of capital</p>
-              </div>
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">TERMINAL VALUE</p>
-                <p className="text-2xl font-bold text-primary font-mono">Gordon</p>
-                <p className="text-xs text-muted-foreground mt-2">Growth model approach</p>
-              </div>
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">SENSITIVITY</p>
-                <p className="text-2xl font-bold text-primary font-mono">2x2</p>
-                <p className="text-xs text-muted-foreground mt-2">WACC x growth rate table</p>
-              </div>
+        {/* ===== EXPERIENCE ===== */}
+        <section id="experience" className="px-6 md:px-10 pb-8 md:pb-12">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-wrap items-end justify-between gap-6 border-t border-border pt-16 pb-8 mb-12">
+              <h2 className="font-serif text-4xl md:text-5xl tracking-tight reveal">Experience</h2>
+              <p className="font-mono text-[10px] uppercase tracking-[.14em] text-muted-foreground max-w-xs reveal">
+                Four roles across university finance operations, trade, and a finance internship.
+              </p>
             </div>
 
-            <p className="text-muted-foreground leading-relaxed max-w-3xl mb-8">
-              Built comprehensive DCF models as part of self-directed financial research, applying concepts from macroeconomics and managerial accounting coursework. Models include revenue forecasting, free cash flow projections, WACC calculation, terminal value estimation, and sensitivity analysis. This work underpins my approach to equity research and lays the groundwork for the quantitative rigor required in hedge fund investing.
+            <div className="space-y-6">
+              {experience.map((job) => (
+                <article
+                  key={job.n}
+                  className="grain-card border border-border rounded-2xl p-6 md:p-8 hover:border-primary transition-colors duration-300 reveal"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
+                    <div className="md:col-span-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span
+                          className="w-2.5 h-2.5 rounded-full"
+                          style={{ background: job.color }}
+                        />
+                        <span className="font-mono text-[10px] uppercase tracking-[.16em] text-muted-foreground">
+                          {job.category}
+                        </span>
+                      </div>
+                      <div className="font-mono text-6xl md:text-7xl leading-none text-border mb-3">
+                        {job.n}
+                      </div>
+                      <h3 className="font-serif text-2xl leading-tight tracking-tight">
+                        {job.role}
+                      </h3>
+                      <p className="text-sm text-primary mt-1">{job.org}</p>
+                      <p className="font-mono text-[10px] uppercase tracking-[.12em] text-muted-foreground mt-3">
+                        {job.meta}
+                      </p>
+                    </div>
+                    <div className="md:col-span-8">
+                      <ul className="space-y-3">
+                        {job.points.map((pt, i) => (
+                          <li
+                            key={i}
+                            className="text-[15px] leading-relaxed text-muted-foreground flex gap-3"
+                          >
+                            <span className="text-primary mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary" />
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== PROJECTS ===== */}
+        <section id="projects" className="px-6 md:px-10 py-16 md:py-24">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-wrap items-end justify-between gap-6 border-t border-border pt-16 pb-8 mb-12">
+              <h2 className="font-serif text-4xl md:text-5xl tracking-tight reveal">
+                Selected Work
+              </h2>
+              <p className="font-mono text-[10px] uppercase tracking-[.14em] text-muted-foreground max-w-xs reveal">
+                Where the finance and the engineering meet.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {projects.map((p) => {
+                const inner = (
+                  <>
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="font-mono text-5xl leading-none text-border">{p.n}</div>
+                      {p.href && (
+                        <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                      )}
+                    </div>
+                    <div className="mt-6">
+                      <h3 className="font-serif text-3xl tracking-tight group-hover:text-primary transition-colors">
+                        {p.title}
+                      </h3>
+                      <p className="text-sm text-primary mt-1">{p.subtitle}</p>
+                      <p className="font-mono text-[10px] uppercase tracking-[.14em] text-muted-foreground mt-2">
+                        {p.year}
+                      </p>
+                    </div>
+                    <p className="text-[15px] leading-relaxed text-muted-foreground mt-5">
+                      {p.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mt-6">
+                      {p.tags.map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-[9px] uppercase tracking-[.1em] border border-border rounded-full px-2.5 py-1 text-muted-foreground"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                )
+                const cls =
+                  "group grain-card border border-border rounded-2xl p-6 md:p-8 hover:border-primary transition-colors duration-300 reveal flex flex-col"
+                return p.href ? (
+                  <Link
+                    key={p.n}
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cls}
+                  >
+                    {inner}
+                  </Link>
+                ) : (
+                  <article key={p.n} className={cls}>
+                    {inner}
+                  </article>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== SKILLS ===== */}
+        <section id="skills" className="px-6 md:px-10 pb-16 md:pb-24">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-wrap items-end justify-between gap-6 border-t border-border pt-16 pb-8 mb-12">
+              <h2 className="font-serif text-4xl md:text-5xl tracking-tight reveal">
+                Skills &amp; Tools
+              </h2>
+            </div>
+            <div className="divide-y divide-border border-y border-border">
+              {skillGroups.map((g) => (
+                <div key={g.label} className="grid md:grid-cols-12 gap-4 md:gap-8 py-7 reveal">
+                  <h3 className="md:col-span-4 font-serif text-xl tracking-tight">{g.label}</h3>
+                  <p className="md:col-span-8 text-[15px] leading-relaxed text-muted-foreground">
+                    {g.items}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== LEADERSHIP · CERTIFICATIONS · COURSEWORK ===== */}
+        <section id="more" className="px-6 md:px-10 pb-24 md:pb-32">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+            <div className="grain-card border border-border rounded-2xl p-6 md:p-8 reveal">
+              <p className="font-mono text-[10px] uppercase tracking-[.16em] text-primary mb-4">
+                Leadership
+              </p>
+              <h3 className="font-serif text-xl tracking-tight leading-snug">
+                Model United Nations
+              </h3>
+              <p className="text-sm text-primary mt-1">Alpha Urbane Project · Rep. of Luxembourg</p>
+              <p className="text-[14px] leading-relaxed text-muted-foreground mt-4">
+                Drafted and presented position papers and resolutions; negotiated with international
+                delegates and delivered formal speeches to the assembly.
+              </p>
+            </div>
+
+            <div className="grain-card border border-border rounded-2xl p-6 md:p-8 reveal">
+              <p className="font-mono text-[10px] uppercase tracking-[.16em] text-primary mb-4">
+                Licenses &amp; Certifications
+              </p>
+              <ul className="space-y-4">
+                <li>
+                  <p className="font-serif text-lg tracking-tight">Bloomberg Market Concepts</p>
+                  <p className="font-mono text-[10px] uppercase tracking-[.14em] text-muted-foreground mt-1">
+                    BMC — Completed
+                  </p>
+                </li>
+                <li>
+                  <p className="font-serif text-lg tracking-tight">Securities Industry Essentials</p>
+                  <p className="font-mono text-[10px] uppercase tracking-[.14em] text-muted-foreground mt-1">
+                    SIE Exam — In progress
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div className="grain-card border border-border rounded-2xl p-6 md:p-8 reveal">
+              <p className="font-mono text-[10px] uppercase tracking-[.16em] text-primary mb-4">
+                Relevant Coursework
+              </p>
+              <p className="text-[14px] leading-relaxed text-muted-foreground">
+                Managerial Accounting · Microeconomics · Macroeconomics · Business Statistics ·
+                Business Calculus · Introduction to Programming
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== CONTACT / FOOTER ===== */}
+        <footer
+          id="contact"
+          className="bg-foreground text-background px-6 md:px-10 py-24 md:py-32"
+        >
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="font-mono text-[11px] uppercase tracking-[.22em] text-background/50 mb-6">
+              Let&apos;s connect
             </p>
-            
-            <div className="flex flex-wrap gap-3">
-              <span className="px-4 py-2 border border-primary text-primary rounded text-xs tracking-wide">
-                EQUITY RESEARCH
-              </span>
-              <span className="px-4 py-2 border border-primary text-primary rounded text-xs tracking-wide">
-                PAPER TRADING
-              </span>
-              <span className="px-4 py-2 border border-primary text-primary rounded text-xs tracking-wide">
-                MARKET ANALYSIS
-              </span>
-            </div>
-          </div>
-        </section>
-
-        {/* Vaelor - Featured Project */}
-        <section className="py-24 px-6 lg:px-12 border-t border-border/30">
-          <div className="mx-auto max-w-7xl">
-            <p className="text-xs text-primary tracking-[0.2em] uppercase mb-4">// Algorithmic Trading</p>
-            <Link 
-              href="https://vaelor.dev" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block hover:opacity-80 transition-opacity"
+            <h3 className="font-serif text-3xl md:text-5xl leading-tight tracking-tight">
+              Open to internships &amp; finance
+              <br className="hidden sm:block" /> conversations
+              <span className="text-primary">.</span>
+            </h3>
+            <a
+              href="mailto:vivaanjain2904@gmail.com"
+              className="inline-block mt-8 font-serif text-xl md:text-2xl text-background border-b border-background/30 hover:border-background pb-1 transition-colors"
             >
-              <h2 className="text-4xl md:text-5xl font-serif mb-16">Vaelor</h2>
-            </Link>
-            
-            {/* Project Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">SIGNALS</p>
-                <p className="text-2xl font-bold text-primary font-mono">Multi-factor</p>
-                <p className="text-xs text-muted-foreground mt-2">RSI + MA + Momentum</p>
-              </div>
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">STOPS</p>
-                <p className="text-2xl font-bold text-primary font-mono">ATR-based</p>
-                <p className="text-xs text-muted-foreground mt-2">Per-stock volatility sizing</p>
-              </div>
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">ALERTS</p>
-                <p className="text-2xl font-bold text-primary font-mono">&lt;15 min</p>
-                <p className="text-xs text-muted-foreground mt-2">Email · Push · Discord</p>
-              </div>
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">EXECUTION</p>
-                <p className="text-2xl font-bold text-primary font-mono">Alpaca</p>
-                <p className="text-xs text-muted-foreground mt-2">Auto paper trading API</p>
-              </div>
-              <div className="p-6 bg-card/30 border border-border/30 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-3 tracking-wide">DEPLOYMENT</p>
-                <p className="text-2xl font-bold text-primary font-mono">Live</p>
-                <p className="text-xs text-muted-foreground mt-2">vaelor.dev</p>
-              </div>
-            </div>
-
-            <p className="text-muted-foreground leading-relaxed max-w-3xl mb-8">
-              Built a full-stack paper trading platform that sizes stop-loss and take-profit levels using each stock&apos;s own volatility (14-day ATR) and scores drop probability through a blend of RSI, moving averages, and momentum. Multi-channel alerts fire via email, mobile push, and Discord within 15 minutes of any threshold trip, with optional hands-off execution through the Alpaca paper trading API. Built for retail traders who can&apos;t watch the screen all day — Vaelor pages you when something matters and stays quiet otherwise.
-            </p>
-
-            <div className="flex flex-wrap gap-3">
-              <span className="px-4 py-2 border border-primary text-primary rounded text-xs tracking-wide">
-                RISK MANAGEMENT
-              </span>
-              <span className="px-4 py-2 border border-primary text-primary rounded text-xs tracking-wide">
-                REAL-TIME ALERTS
-              </span>
-              <span className="px-4 py-2 border border-primary text-primary rounded text-xs tracking-wide">
-                FULL-STACK
-              </span>
-            </div>
-          </div>
-        </section>
-
-        {/* Experience Section */}
-        <section id="experience" className="py-24 px-6 lg:px-12 border-t border-border/30">
-          <div className="mx-auto max-w-7xl">
-            <p className="text-xs text-primary tracking-[0.2em] uppercase mb-4">// Experience</p>
-            <h2 className="text-4xl md:text-5xl font-serif mb-16">Professional Experience</h2>
-            
-            <div className="space-y-12">
-              <div className="grid md:grid-cols-4 gap-6 pb-12 border-b border-border/30">
-                <div>
-                  <p className="text-xs text-muted-foreground tracking-wide">MAR – MAY 2026</p>
-                </div>
-                <div className="md:col-span-3">
-                  <h3 className="text-lg font-semibold text-foreground mb-1">Office Assistant</h3>
-                  <p className="text-sm text-primary mb-4">ASU DEPARTMENT OF PSYCHOLOGY</p>
-                  <p className="text-muted-foreground leading-relaxed">Process financial documentation in Workday, maintaining accuracy across departmental expense and reimbursement records. Manage front-desk operations including call handling, scheduling, mail, and confidential departmental records.</p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-4 gap-6 pb-12 border-b border-border/30">
-                <div>
-                  <p className="text-xs text-muted-foreground tracking-wide">MAR 2026 – PRESENT</p>
-                </div>
-                <div className="md:col-span-3">
-                  <h3 className="text-lg font-semibold text-foreground mb-1">Maintenance &amp; Operations Office Assistant</h3>
-                  <p className="text-sm text-primary mb-4">ASU FACILITIES DEVELOPMENT &amp; MANAGEMENT</p>
-                  <p className="text-muted-foreground leading-relaxed">Maintain data integrity in TMA facilities management software while managing inbound calls during evening shift operations. Support administrative and operational workflows on Tempe campus using Microsoft Office and standard office equipment.</p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-4 gap-6 pb-12 border-b border-border/30">
-                <div>
-                  <p className="text-xs text-muted-foreground tracking-wide">MAY – AUG 2024</p>
-                </div>
-                <div className="md:col-span-3">
-                  <h3 className="text-lg font-semibold text-foreground mb-1">Office Aide</h3>
-                  <p className="text-sm text-primary mb-4">ESSE TRADING IMPEX LLP</p>
-                  <p className="text-muted-foreground leading-relaxed">Tracked purchase orders and shipments across multiple suppliers in Excel; reconciled invoices to POs and flagged pricing discrepancies. Prepared weekly order-processing and shipment-tracking reports to support operations decisions.</p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-4 gap-6">
-                <div>
-                  <p className="text-xs text-muted-foreground tracking-wide">MAY – JUN 2023</p>
-                </div>
-                <div className="md:col-span-3">
-                  <h3 className="text-lg font-semibold text-foreground mb-1">Finance Intern</h3>
-                  <p className="text-sm text-primary mb-4">INNOLEARN SOLUTIONS PVT LTD</p>
-                  <p className="text-muted-foreground leading-relaxed">Assisted finance team with organizing financial records, supporting data analysis, and preparing documentation for internal review. Built and maintained a user-records database in Excel using pivot tables, VLOOKUP, and advanced spreadsheet techniques.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Roadmap Section - 5 Columns */}
-        <section id="roadmap" className="py-24 px-6 lg:px-12 border-t border-border/30">
-          <div className="mx-auto max-w-7xl">
-            <p className="text-xs text-primary tracking-[0.2em] uppercase mb-4">// Roadmap</p>
-            <h2 className="text-4xl md:text-5xl font-serif mb-16">Hedge Fund Roadmap</h2>
-            
-            <div className="grid md:grid-cols-5 gap-6">
-              <div className="border-t-2 border-border/50 pt-6">
-                <h3 className="text-lg font-semibold text-foreground mb-3">Foundations</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">ASU Finance &amp; Economics degree, paper trading, DCF modeling, Excel mastery</p>
-              </div>
-              <div className="border-t-2 border-border/50 pt-6">
-                <h3 className="text-lg font-semibold text-foreground mb-3">IB / Research Role</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">Summer analyst internships at investment banks or asset managers. CFA Level I begin.</p>
-              </div>
-              <div className="border-t-2 border-border/50 pt-6">
-                <h3 className="text-lg font-semibold text-foreground mb-3">Graduation &amp; FT</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">B.S. Finance &amp; Economics from W. P. Carey. Full-time analyst role. Python, Bloomberg Terminal proficiency.</p>
-              </div>
-              <div className="border-t-2 border-border/50 pt-6">
-                <h3 className="text-lg font-semibold text-foreground mb-3">Build Track Record</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">Analyst → Associate at fund. CFA charter. Develop investment thesis and portfolio strategy.</p>
-              </div>
-              <div className="border-t-2 border-border/50 pt-6">
-                <h3 className="text-lg font-semibold text-foreground mb-3">Launch Fund</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">Raise capital from LPs. Launch hedge fund with clear mandate, risk framework, and edge.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Section */}
-        <section id="contact" className="py-24 px-6 lg:px-12 border-t border-border/30">
-          <div className="mx-auto max-w-7xl text-center">
-            <p className="text-xs text-primary tracking-[0.2em] uppercase mb-4">// Contact</p>
-            <h2 className="text-4xl md:text-5xl font-serif mb-6">Let&apos;s Connect</h2>
-            <p className="text-muted-foreground mb-8">Open to internship opportunities, finance conversations, and IB recruiting.</p>
-            
-            <p className="text-3xl md:text-4xl font-serif text-foreground mb-12 border-b border-border/50 pb-8 inline-block">
               vivaanjain2904@gmail.com
-            </p>
+            </a>
 
-            <div className="flex justify-center gap-4">
-              <Link 
-                href="https://linkedin.com/in/vivaanjain2904" 
+            <div className="mt-12 flex items-center justify-center gap-6 font-mono text-[11px] uppercase tracking-[.16em] text-background/60">
+              <Link
+                href="https://linkedin.com/in/vivaanjain2904"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 border border-border/50 text-muted-foreground hover:text-foreground hover:border-foreground transition-colors text-sm tracking-wide"
+                className="hover:text-primary transition-colors"
               >
-                LINKEDIN
+                LinkedIn
               </Link>
-              <Link 
-                href="/vivaan-resume.pdf" 
+              <span className="w-1 h-1 rounded-full bg-background/30" />
+              <Link
+                href="/vivaan-resume.pdf"
                 target="_blank"
-                className="px-6 py-3 border border-border/50 text-muted-foreground hover:text-foreground hover:border-foreground transition-colors text-sm tracking-wide"
+                className="hover:text-primary transition-colors"
               >
-                RESUME PDF
+                Résumé PDF
+              </Link>
+              <span className="w-1 h-1 rounded-full bg-background/30" />
+              <Link
+                href="https://vaelor.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                Vaelor
               </Link>
             </div>
-          </div>
-        </section>
 
-        {/* Footer */}
-        <footer className="py-8 px-6 lg:px-12 border-t border-border/30">
-          <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} Vivaan Jain. All rights reserved.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Building toward the fund.
+            <p className="mt-16 font-mono text-[11px] tracking-[.14em] text-background/40">
+              © {new Date().getFullYear()} Vivaan Jain · Building toward the fund.
             </p>
           </div>
         </footer>
