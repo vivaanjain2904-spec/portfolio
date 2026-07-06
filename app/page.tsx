@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 
 /* ------------------------------------------------------------------ */
@@ -287,18 +288,42 @@ export default function PortfolioPage() {
 
         {/* ===== ABOUT / FIELD GUIDE ===== */}
         <section id="about" className="border-t border-border px-6 md:px-10 py-24 md:py-32">
-          <div className="max-w-4xl mx-auto">
-            <p className="font-mono text-[11px] uppercase tracking-[.2em] text-primary mb-6 reveal">
+          <div className="max-w-6xl mx-auto">
+            <p className="font-mono text-[11px] uppercase tracking-[.2em] text-primary mb-8 reveal">
               About
             </p>
-            <p className="dropcap font-serif text-2xl md:text-[32px] leading-[1.4] tracking-tight reveal">
-              I&apos;m driven by a single long-term goal: launching my own hedge fund. At W. P. Carey
-              I&apos;m building the foundation for it — three-statement and DCF valuation modeling,
-              equity research, and the discipline of the markets through active paper trading. In
-              parallel I taught myself to ship software, designing and deploying Vaelor, a full-stack
-              AI trading platform, from database to client portal. I care about the same thing in a
-              spreadsheet and a codebase: rigor you can defend, and an edge you can measure.
-            </p>
+
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+              <figure className="lg:col-span-5 reveal">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-border grain-card">
+                  <Image
+                    src="/vivaan-profile.jpg"
+                    alt="Vivaan Jain, standing in a study lined with finance and business books"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
+                    style={{ objectPosition: "center 15%" }}
+                    priority
+                  />
+                </div>
+                <figcaption className="mt-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.16em] text-muted-foreground">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  Vivaan Jain · Tempe, AZ
+                </figcaption>
+              </figure>
+
+              <div className="lg:col-span-7">
+                <p className="dropcap font-serif text-2xl md:text-[28px] leading-[1.42] tracking-tight reveal">
+                  I&apos;m driven by a single long-term goal: launching my own hedge fund. At W. P.
+                  Carey I&apos;m building the foundation for it — three-statement and DCF valuation
+                  modeling, equity research, and the discipline of the markets through active paper
+                  trading. In parallel I taught myself to ship software, designing and deploying
+                  Vaelor, a full-stack AI trading platform, from database to client portal. I care
+                  about the same thing in a spreadsheet and a codebase: rigor you can defend, and an
+                  edge you can measure.
+                </p>
+              </div>
+            </div>
 
             <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-px bg-border border border-border rounded-2xl overflow-hidden reveal">
               {[
