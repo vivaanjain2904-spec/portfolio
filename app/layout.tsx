@@ -1,20 +1,28 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google'
+import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
-const _playfair = Playfair_Display({ 
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+})
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-jetbrains",
+})
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-serif"
-});
+  variable: "--font-fraunces",
+})
 
 export const metadata: Metadata = {
-  title: 'Vivaan — Finance Portfolio',
-  description: 'Sophomore at Arizona State University studying Economics, building toward launching a hedge fund.',
+  title: 'Vivaan Jain — Economics & Finance',
+  description:
+    'Vivaan Jain — a sophomore at Arizona State University studying Economics & Finance. Financial modeling, equity research, and Vaelor, a full-stack AI trading platform. Building toward a hedge fund.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -41,7 +49,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`dark bg-background ${_playfair.variable}`}>
+    <html
+      lang="en"
+      className={`bg-background ${inter.variable} ${jetbrainsMono.variable} ${fraunces.variable}`}
+    >
       <body className="font-sans antialiased bg-background text-foreground">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
