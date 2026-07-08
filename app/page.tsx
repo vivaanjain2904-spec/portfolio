@@ -9,8 +9,11 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
+  useMotionValue,
+  useSpring,
   MotionConfig,
   type Variants,
+  type MotionValue,
 } from "motion/react"
 
 /* ------------------------------------------------------------------ */
@@ -133,10 +136,10 @@ const skillGroups = [
 ]
 
 const heroFrames = [
-  { label: "01 · MARKETS", w: "82%", h: "60%", border: "rgba(23,20,15,.16)", rust: false },
-  { label: "02 · MODELING", w: "56%", h: "40%", border: "rgba(23,20,15,.22)", rust: false },
-  { label: "03 · BUILDING", w: "30%", h: "22%", border: "rgba(193,68,28,.35)", rust: true },
-  { label: "04", w: "12%", h: "8%", border: "rgba(23,20,15,.28)", rust: false },
+  { label: "01 · MARKETS", w: "82%", h: "60%", border: "rgba(23,20,15,.16)", rust: false, p: 42 },
+  { label: "02 · MODELING", w: "56%", h: "40%", border: "rgba(23,20,15,.22)", rust: false, p: 30 },
+  { label: "03 · BUILDING", w: "30%", h: "22%", border: "rgba(193,68,28,.35)", rust: true, p: 18 },
+  { label: "04", w: "12%", h: "8%", border: "rgba(23,20,15,.28)", rust: false, p: 10 },
 ]
 
 /* ------------------------------------------------------------------ */
@@ -173,6 +176,36 @@ const cardHover = {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Hero frame — parallax layer that tracks the cursor                 */
+/* ------------------------------------------------------------------ */
+
+function HeroFrame({
+  frame,
+  sx,
+  sy,
+}: {
+  frame: (typeof heroFrames)[number]
+  sx: MotionValue<number>
+  sy: MotionValue<number>
+}) {
+  const x = useTransform(sx, (v) => v * frame.p)
+  const y = useTransform(sy, (v) => v * frame.p)
+  return (
+    <motion.div
+      className="hero-frame"
+      style={{ width: frame.w, height: frame.h, borderColor: frame.border, x, y }}
+    >
+      <span
+        className="font-mono text-[10px] tracking-[.14em]"
+        style={{ color: frame.rust ? "var(--rust)" : "var(--ink-soft)" }}
+      >
+        {frame.label}
+      </span>
+    </motion.div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
 
@@ -188,13 +221,41 @@ export default function PortfolioPage() {
     target: heroRef,
     offset: ["start start", "end start"],
   })
-  const stageScale = useTransform(heroProgress, [0, 1], [1, 5.2])
-  const stageRotate = useTransform(heroProgress, [0, 1], [0, 7])
-  const stageOpacity = useTransform(heroProgress, [0, 0.7, 1], [1, 1, 0])
-  const contentY = useTransform(heroProgress, [0, 1], [0, -70])
+  const stageScale = useTransform(heroProgress, [0, 1], [1, 6.6])
+  const stageRotate = useTransform(heroProgress, [0, 1], [0, 8])
+  const stageOpacity = useTransform(heroProgress, [0, 0.72, 1], [1, 1, 0])
+  const contentY = useTransform(heroProgress, [0, 1], [0, -90])
   const contentOpacity = useTransform(heroProgress, [0, 0.78], [1, 0])
 
-  const stageStyle = reduce ? undefined : { scale: stageScale, rotate: stageRotate, opacity: stageOpacity }
+  // Cursor-driven parallax + subtle 3D tilt on the hero frames.
+  const pointerX = useMotionValue(0)
+  const pointerY = useMotionValue(0)
+  const springCfg = { stiffness: 120, damping: 20, mass: 0.3 }
+  const sx = useSpring(pointerX, springCfg)
+  const sy = useSpring(pointerY, springCfg)
+  const tiltY = useTransform(sx, [-0.5, 0.5], [-6, 6])
+  const tiltX = useTransform(sy, [-0.5, 0.5], [6, -6])
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (reduce) return
+    pointerX.set(e.clientX / window.innerWidth - 0.5)
+    pointerY.set(e.clientY / window.innerHeight - 0.5)
+  }
+  const handlePointerLeave = () => {
+    pointerX.set(0)
+    pointerY.set(0)
+  }
+
+  const stageStyle = reduce
+    ? undefined
+    : {
+        scale: stageScale,
+        rotate: stageRotate,
+        opacity: stageOpacity,
+        rotateX: tiltX,
+        rotateY: tiltY,
+        transformStyle: "preserve-3d" as const,
+      }
   const contentStyle = reduce ? undefined : { y: contentY, opacity: contentOpacity }
 
   return (
@@ -232,6 +293,8 @@ export default function PortfolioPage() {
           <section
             id="hero"
             ref={heroRef}
+            onPointerMove={handlePointerMove}
+            onPointerLeave={handlePointerLeave}
             className="relative min-h-[100svh] flex items-center justify-center px-6"
             style={{ perspective: "1400px" }}
           >
@@ -241,18 +304,7 @@ export default function PortfolioPage() {
               aria-hidden="true"
             >
               {heroFrames.map((f) => (
-                <div
-                  key={f.label}
-                  className="hero-frame"
-                  style={{ width: f.w, height: f.h, borderColor: f.border }}
-                >
-                  <span
-                    className="font-mono text-[10px] tracking-[.14em]"
-                    style={{ color: f.rust ? "var(--rust)" : "var(--ink-soft)" }}
-                  >
-                    {f.label}
-                  </span>
-                </div>
+                <HeroFrame key={f.label} frame={f} sx={sx} sy={sy} />
               ))}
             </motion.div>
 
