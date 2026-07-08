@@ -136,10 +136,10 @@ const skillGroups = [
 ]
 
 const heroFrames = [
-  { label: "01 · MARKETS", w: "82%", h: "60%", border: "rgba(23,20,15,.16)", rust: false, p: 42 },
-  { label: "02 · MODELING", w: "56%", h: "40%", border: "rgba(23,20,15,.22)", rust: false, p: 30 },
-  { label: "03 · BUILDING", w: "30%", h: "22%", border: "rgba(193,68,28,.35)", rust: true, p: 18 },
-  { label: "04", w: "12%", h: "8%", border: "rgba(23,20,15,.28)", rust: false, p: 10 },
+  { label: "01 · MARKETS", w: "82%", h: "60%", border: "rgba(23,20,15,.16)", rust: false, p: 10 },
+  { label: "02 · MODELING", w: "56%", h: "40%", border: "rgba(23,20,15,.22)", rust: false, p: 16 },
+  { label: "03 · BUILDING", w: "30%", h: "22%", border: "rgba(193,68,28,.35)", rust: true, p: 24 },
+  { label: "04", w: "12%", h: "8%", border: "rgba(23,20,15,.28)", rust: false, p: 32 },
 ]
 
 /* ------------------------------------------------------------------ */
@@ -227,14 +227,14 @@ export default function PortfolioPage() {
   const contentY = useTransform(heroProgress, [0, 1], [0, -90])
   const contentOpacity = useTransform(heroProgress, [0, 0.78], [1, 0])
 
-  // Cursor-driven parallax + subtle 3D tilt on the hero frames.
+  // Cursor-driven parallax on the hero frames — subtle only. Each frame
+  // drifts a few px toward the pointer, keeping the composition centered
+  // and clean (no tilt/rotation, which distorted the layout).
   const pointerX = useMotionValue(0)
   const pointerY = useMotionValue(0)
   const springCfg = { stiffness: 120, damping: 20, mass: 0.3 }
   const sx = useSpring(pointerX, springCfg)
   const sy = useSpring(pointerY, springCfg)
-  const tiltY = useTransform(sx, [-0.5, 0.5], [-6, 6])
-  const tiltX = useTransform(sy, [-0.5, 0.5], [6, -6])
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (reduce) return
@@ -248,14 +248,7 @@ export default function PortfolioPage() {
 
   const stageStyle = reduce
     ? undefined
-    : {
-        scale: stageScale,
-        rotate: stageRotate,
-        opacity: stageOpacity,
-        rotateX: tiltX,
-        rotateY: tiltY,
-        transformStyle: "preserve-3d" as const,
-      }
+    : { scale: stageScale, rotate: stageRotate, opacity: stageOpacity }
   const contentStyle = reduce ? undefined : { y: contentY, opacity: contentOpacity }
 
   return (
