@@ -374,7 +374,7 @@ export default function PortfolioPage() {
                   { k: "GPA", v: "3.47" },
                   { k: "Honors", v: "Dean’s List" },
                   { k: "Graduating", v: "2028" },
-                  { k: "Licensing", v: "SIE — in progress" },
+                  { k: "Licensing", v: "SIE — Passed" },
                 ].map((s) => (
                   <motion.div key={s.k} variants={fadeUp} className="bg-background p-5 md:p-6">
                     <div className="font-serif text-2xl md:text-3xl tracking-tight">{s.v}</div>
@@ -565,7 +565,7 @@ export default function PortfolioPage() {
                   <li>
                     <p className="font-serif text-lg tracking-tight">Securities Industry Essentials</p>
                     <p className="font-mono text-[10px] uppercase tracking-[.14em] text-muted-foreground mt-1">
-                      SIE Exam — In progress
+                      SIE Exam — Passed
                     </p>
                   </li>
                 </ul>
