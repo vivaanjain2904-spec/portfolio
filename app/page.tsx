@@ -621,7 +621,7 @@ export default function PortfolioPage() {
                   LinkedIn
                 </Link>
                 <span className="w-1 h-1 rounded-full bg-background/30" />
-                <Link href="/vivaan-resume.pdf" target="_blank" className="hover:text-primary transition-colors">
+                <Link href="/vivaan-resume.pdf?v=20260825" target="_blank" className="hover:text-primary transition-colors">
                   Résumé PDF
                 </Link>
                 <span className="w-1 h-1 rounded-full bg-background/30" />
